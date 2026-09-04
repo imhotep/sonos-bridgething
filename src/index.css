@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("./fonts/Outfit-Variable.ttf") format("truetype-variations");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("./fonts/Inter-Variable.ttf") format("truetype-variations");
+}
+
+@theme {
+  --color-off-white: #efefef;
+  --color-bg: #0a0c0e;
+  --color-screen: #060809;
+  --color-fg: #efefef;
+  --color-muted: #a7adb5;
+  --color-accent: #00a8e8;
+  --color-ok: #3ddc84;
+  --color-err: #dc3d3d;
+  --color-warn: #ff7070;
+  --color-experimental: #ffb066;
+
+  --color-rule: color-mix(in srgb, var(--color-fg) 10%, transparent);
+  --color-rule-strong: color-mix(in srgb, var(--color-fg) 15%, transparent);
+  --color-edge: color-mix(in srgb, var(--color-fg) 25%, transparent);
+  --color-dim: color-mix(in srgb, var(--color-fg) 35%, transparent);
+  --color-soft: color-mix(in srgb, var(--color-fg) 55%, transparent);
+  --color-near: color-mix(in srgb, var(--color-fg) 80%, transparent);
+
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  --color-ok-soft: color-mix(in srgb, var(--color-ok) 14%, transparent);
+  --color-err-soft: color-mix(in srgb, var(--color-err) 14%, transparent);
+  --color-warn-soft: color-mix(in srgb, var(--color-warn) 14%, transparent);
+  --color-experimental-soft: color-mix(in srgb, var(--color-experimental) 14%, transparent);
+  --color-neutral-soft: color-mix(in srgb, var(--color-fg) 8%, transparent);
+
+  --text-eyebrow: 0.6875rem;
+  --text-hint: 0.75rem;
+  --text-body: 0.875rem;
+  --text-row: 0.9375rem;
+  --text-row-lg: 1.0625rem;
+  --text-title: 1.25rem;
+  --text-hero: 1.375rem;
+  --text-screen-title: 2.125rem;
+
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --tracking-wordmark: -0.03em;
+  --tracking-display: -0.02em;
+  --tracking-tight-1: -0.01em;
+
+  --radius-none: 0;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body {
+    @apply bg-bg text-off-white font-body antialiased scheme-only-dark;
+    width: 800px;
+    height: 480px;
+    margin: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}

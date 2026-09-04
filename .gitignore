@@ -1,0 +1,10 @@
+node_modules
+dist
+.DS_Store
+*.log
+.env*
+public/sonos-seeds.json
+site
+Sonos-Control-*.zip
+.claude
+.agents
