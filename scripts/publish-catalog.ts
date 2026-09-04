@@ -98,6 +98,7 @@ mkdirSync(join(siteDir, 'screenshots'), { recursive: true });
 for (const shot of screenshots) copyFileSync(join(shotsDir, shot), join(siteDir, 'screenshots', shot));
 
 const catalog = {
+  $schema: 'https://apps.bridgething.com/schemas/catalog/v1.json',
   schema: 'catalog.v1',
   updated_at: new Date().toISOString(),
   repo: {
@@ -127,6 +128,7 @@ const catalog = {
           },
           ...(settings ? { settings } : {}),
           permissions: manifest.permissions ?? [],
+          min_libbridgething_version: '0.10.0',
           changelog: 'Initial release.',
         },
       ],
