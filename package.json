@@ -10,6 +10,7 @@
     "push": "bun scripts/push.ts",
     "discover": "bun scripts/discover.ts",
     "share": "bun scripts/share.ts",
+    "publish:catalog": "bun scripts/publish-catalog.ts",
     "update": "bunx @bridgething/updater"
   },
   "dependencies": {
