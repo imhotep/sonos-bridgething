@@ -99,7 +99,7 @@ const catalog = {
   schema: 'catalog.v1',
   updated_at: new Date().toISOString(),
   repo: {
-    name: "imhotep's apps",
+    name: 'Sonos Control',
     description: 'webapps I publish for bridgething.',
     homepage: SOURCE_URL,
     icon: `${BASE_URL}/icon.svg`,
