@@ -74,15 +74,12 @@ const zip = bundleZip();
 const zipName = `${manifest.version}.zip`;
 writeFileSync(join(siteDir, manifest.id, zipName), zip);
 
-// hosted settings page (must digest-match the copy inside the bundle)
-let settings: { url: string; size: number; sha256: string } | undefined;
+// hosted settings page bytes still ship in site/ (see the NOTE below), but
+// are not referenced from the catalog while old companions reject the field
 if (manifest.settings) {
   const settingsPath = join(distDir, basename(manifest.settings));
   if (!existsSync(settingsPath)) throw new Error(`manifest declares settings but ${settingsPath} is missing`);
-  const bytes = new Uint8Array(readFileSync(settingsPath));
-  const settingsName = `${manifest.version}.settings.html`;
-  writeFileSync(join(siteDir, manifest.id, settingsName), bytes);
-  settings = { url: `${BASE_URL}/${manifest.id}/${settingsName}`, size: bytes.length, sha256: sha256(bytes) };
+  copyFileSync(settingsPath, join(siteDir, manifest.id, `${manifest.version}.settings.html`));
 }
 
 // icon + screenshots
@@ -114,7 +111,6 @@ const catalog = {
       description: manifest.description ?? '',
       author: AUTHOR,
       icon: `${BASE_URL}/icon.svg`,
-      screenshots: screenshots.map(s => `${BASE_URL}/screenshots/${s}`),
       homepage: SOURCE_URL,
       source: SOURCE_URL,
       versions: [
@@ -126,7 +122,6 @@ const catalog = {
             size: zip.length,
             sha256: sha256(zip),
           },
-          ...(settings ? { settings } : {}),
           permissions: manifest.permissions ?? [],
           min_libbridgething_version: '0.10.0',
           changelog: 'Initial release.',
@@ -136,6 +131,11 @@ const catalog = {
   ],
   recommended_sources: [],
 };
+// NOTE: no `screenshots` or `settings` keys on purpose — companions shipped
+// before 2026-08-30 bundle a strict catalog schema (additionalProperties:
+// false) that predates both fields and rejects the whole source over them.
+// The files still ship in site/ so they can be re-enabled once the old
+// validator is gone.
 
 writeFileSync(join(siteDir, 'catalog.json'), JSON.stringify(catalog, null, 2) + '\n');
 console.log(`wrote site/ — catalog for ${manifest.name} ${manifest.version}`);
