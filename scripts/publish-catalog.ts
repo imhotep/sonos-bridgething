@@ -100,7 +100,7 @@ const catalog = {
   updated_at: new Date().toISOString(),
   repo: {
     name: 'Sonos Control',
-    description: 'webapps I publish for bridgething.',
+    description: 'Control your Sonos rooms and play your Sonos favorites.',
     homepage: SOURCE_URL,
     icon: `${BASE_URL}/icon.svg`,
   },
